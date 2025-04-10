@@ -23,7 +23,7 @@ def remove_empty_fields(d):
         return d
 
 
-def screpe_linkedin_profile(linkedin_profile_url: str = "", mock: bool = False):
+def scrape_linkedin_profile(linkedin_profile_url: str = "", mock: bool = False):
     """Scrape information from LinkedIn profile"""
     if mock:
         linkedin_profile_url = "https://gist.githubusercontent.com/mchojna/920d28e085132d54942222d4898c19d3/raw/0fe265968b5e02dce9243f350b45e761cddd548f/barack-obama-scrapin"
@@ -35,7 +35,7 @@ def screpe_linkedin_profile(linkedin_profile_url: str = "", mock: bool = False):
         url = "https://api.brightdata.com/datasets/v3/trigger"
 
         headers = {
-            "Authorization": f"Bearer {os.getenv('LINKEDIN_API_KEY')}",
+            "Authorization": f"Bearer {os.getenv('BRIGHTDATA_API_KEY')}",
             "Content-Type": "application/json",
         }
 
@@ -53,7 +53,7 @@ def screpe_linkedin_profile(linkedin_profile_url: str = "", mock: bool = False):
             snapshot_id = response.json()["snapshot_id"]
 
             url = f"https://api.brightdata.com/datasets/v3/progress/{snapshot_id}"
-            headers = {"Authorization": f"Bearer {os.getenv('LINKEDIN_API_KEY')}"}
+            headers = {"Authorization": f"Bearer {os.getenv('BRIGHTDATA_API_KEY')}"}
             response = requests.request("GET", url, headers=headers)
 
             while response.json()["status"] == "running":
@@ -63,7 +63,7 @@ def screpe_linkedin_profile(linkedin_profile_url: str = "", mock: bool = False):
             print("Data is available")
 
             url = f"https://api.brightdata.com/datasets/v3/snapshot/{snapshot_id}"
-            headers = {"Authorization": f"Bearer {os.getenv('LINKEDIN_API_KEY')}"}
+            headers = {"Authorization": f"Bearer {os.getenv('BRIGHTDATA_API_KEY')}"}
             response = requests.request("GET", url, headers=headers)
 
     data = remove_empty_fields(response.json())
