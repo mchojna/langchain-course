@@ -31,18 +31,18 @@ if __name__ == "__main__":
         template=summary_template,
     )
 
-    # llm = ChatOpenAI(
-    #     api_key=OPENAI_API_KEY,
-    #     model="o3-mini",
-    # )
+    llm = ChatOpenAI(
+        api_key=OPENAI_API_KEY,
+        model="o3-mini",
+    )
 
     # llm = ChatOllama(
     #     model = "llama3.2",
     # )
 
-    llm = ChatOllama(
-        model = "mistral",
-    )
+    # llm = ChatOllama(
+    #     model = "mistral",
+    # )
 
     chain = summary_prompt_template | llm | StrOutputParser()
 
