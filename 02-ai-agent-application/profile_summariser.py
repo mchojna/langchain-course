@@ -35,6 +35,9 @@ if __name__ == "__main__":
         1. a short summary of the person,
         2. two interesting facts about the person.
     """
+    # information = screpe_linkedin_profile(
+    #     linkedin_profile_url="https://www.linkedin.com/in/andrewyng"
+    # )
     information = screpe_linkedin_profile(mock=True)
 
     summarise_profile(template, information)
